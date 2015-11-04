@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Orchard.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orchard.Environment.Shell.Builders.Models;
+using DryIoc;
+using DryIoc.Extensions.DependencyInjection;
 
 #if DNXCORE50
 using System.Reflection;
@@ -13,11 +15,14 @@ namespace Orchard.Environment.Shell.Builders {
     public class ShellContainerFactory : IShellContainerFactory {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger _logger;
+        private readonly IContainer _container;
         private readonly ILoggerFactory _loggerFactory;
 
         public ShellContainerFactory(IServiceProvider serviceProvider,
+            IContainer container,
             ILoggerFactory loggerFactory) {
             _serviceProvider = serviceProvider;
+            _container = container;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger<ShellContainerFactory>();
         }
@@ -32,16 +37,16 @@ namespace Orchard.Environment.Shell.Builders {
             // Sure this is right?
             serviceCollection.AddInstance(_loggerFactory);
 
-            IServiceCollection moduleServiceCollection = new ServiceCollection();
-            foreach (var dependency in blueprint.Dependencies
-                .Where(t => typeof(IModule).IsAssignableFrom(t.Type))) {
+            using (var scope = _container.OpenScope()) {
+                foreach (var dependency in blueprint.Dependencies
+                    .Where(t => typeof(IModule).IsAssignableFrom(t.Type))) {
 
-                moduleServiceCollection.AddScoped(typeof(IModule), dependency.Type);
-            }
+                    scope.Register(typeof(IModule), dependency.Type);
+                }
 
-            var moduleServiceProvider = moduleServiceCollection.BuildShellServiceProviderWithHost(_serviceProvider);
-            foreach (var service in moduleServiceProvider.GetServices<IModule>()) {
-                service.Configure(serviceCollection);
+                foreach (var service in scope.Resolve<IServiceProvider>().GetServices<IModule>()) {
+                    service.Configure(serviceCollection);
+                }
             }
             
             foreach (var dependency in blueprint.Dependencies
@@ -65,7 +70,9 @@ namespace Orchard.Environment.Shell.Builders {
                 }
             }
 
-            return serviceCollection.BuildShellServiceProviderWithHost(_serviceProvider);
+            var nestedScope = _container.OpenScope();
+            nestedScope.Populate(serviceCollection);
+            return nestedScope.Resolve<IServiceProvider>();
         }
     }
 }

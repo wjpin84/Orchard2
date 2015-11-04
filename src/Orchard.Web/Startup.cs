@@ -1,3 +1,5 @@
+using DryIoc;
+using DryIoc.Extensions.DependencyInjection;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,7 +16,9 @@ namespace Orchard.Web {
             services.AddModuleFolder("~/Core/Orchard.Core");
             services.AddModuleFolder("~/Modules");
 
-            return services.BuildServiceProvider();
+            IContainer container = new Container();
+            container.Populate(services);
+            return container.Resolve<IServiceProvider>();
         }
 
         public void Configure(IApplicationBuilder builder, ILoggerFactory loggerFactory, IOrchardHost orchardHost) {

@@ -19,14 +19,6 @@ namespace Orchard.Hosting {
             services.AddInstance<ICacheContextAccessor>(new CacheContextAccessor());
             services.AddSingleton<ICache, Cache>();
 
-            additionalDependencies(services);
-            
-            services.AddTransient<IOrchardShellHost, DefaultOrchardShellHost>();
-
-            return services.AddFallback();
-        }
-
-        public static IServiceCollection AddHostCore(this IServiceCollection services) {
             services.AddSingleton<IClock, Clock>();
 
             services.AddSingleton<IOrchardHost, DefaultOrchardHost>();
@@ -44,6 +36,10 @@ namespace Orchard.Hosting {
                 }
             }
             services.AddSingleton<IRunningShellTable, RunningShellTable>();
+
+            additionalDependencies(services);
+            
+            services.AddTransient<IOrchardShellHost, DefaultOrchardShellHost>();
 
             return services;
         }

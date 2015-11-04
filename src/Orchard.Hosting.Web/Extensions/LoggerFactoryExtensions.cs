@@ -6,6 +6,7 @@ using Orchard.Environment.Extensions.Loaders;
 using System;
 using System.Linq;
 using Orchard.Environment.Shell.Builders;
+using DryIoc;
 
 #if DNXCORE50
 using System.Reflection;
@@ -17,23 +18,25 @@ namespace Orchard.Hosting.Extensions {
             this ILoggerFactory loggingFactory, 
             IServiceProvider serviceProvider) {
             /* TODO (ngm): Abstract this logger stuff outta here! */
-            var loader = serviceProvider.GetRequiredService<IExtensionLoader>();
-            var manager = serviceProvider.GetRequiredService<IExtensionManager>();
+            
+            var loaders = serviceProvider.GetServices<IExtensionLoader>();
+            var manager = serviceProvider.GetService<IExtensionManager>();
 
             var descriptor = manager.GetExtension("Orchard.Logging.Console");
-            var entry = loader.Load(descriptor);
+            var entry = loaders.Select(loader => loader.Load(descriptor)).FirstOrDefault(x => x != null);
             var loggingInitiatorTypes = entry
                 .Assembly
                 .ExportedTypes
                 .Where(et => typeof(ILoggingInitiator).IsAssignableFrom(et));
 
-            IServiceCollection loggerCollection = new ServiceCollection();
-            foreach (var initiatorType in loggingInitiatorTypes) {
-                loggerCollection.AddScoped(typeof(ILoggingInitiator), initiatorType);
-            }
-            var moduleServiceProvider = loggerCollection.BuildShellServiceProviderWithHost(serviceProvider);
-            foreach (var service in moduleServiceProvider.GetServices<ILoggingInitiator>()) {
-                service.Initialize(loggingFactory);
+            using (var scope = new Container().OpenScope()) {
+                foreach (var initiatorType in loggingInitiatorTypes) {
+                    scope.Register(typeof(ILoggingInitiator), initiatorType);
+                }
+
+                foreach (var service in scope.Resolve<IServiceProvider>().GetServices<ILoggingInitiator>()) {
+                    service.Initialize(loggingFactory);
+                }
             }
 
             return loggingFactory;

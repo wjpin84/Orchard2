@@ -10,7 +10,6 @@ namespace Orchard.Hosting {
                 internalServices.AddLogging();
                 internalServices.AddOptions();
 
-                internalServices.AddHostCore();
                 internalServices.AddExtensionManager();
                 internalServices.AddCommands();
 
