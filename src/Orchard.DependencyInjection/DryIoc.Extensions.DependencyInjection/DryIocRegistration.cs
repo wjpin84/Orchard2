@@ -1,5 +1,4 @@
-﻿using DryIoc;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 
@@ -26,8 +25,7 @@ namespace DryIoc.Extensions.DependencyInjection {
                         .Register(
                             descriptor.ServiceType,
                             descriptor.ImplementationType,
-                            reuse,
-                            setup: Setup.With(openResolutionScope: true));
+                            reuse);
                 }
                 else if (descriptor.ImplementationFactory != null) {
                     builder
@@ -35,8 +33,7 @@ namespace DryIoc.Extensions.DependencyInjection {
                             var serviceProvider = context.Resolve<IServiceProvider>();
                             return descriptor.ImplementationFactory(serviceProvider);
                         }, 
-                        reuse,
-                        setup: Setup.With(openResolutionScope: true));
+                        reuse);
                 }
                 else {
                     builder
@@ -55,7 +52,7 @@ namespace DryIoc.Extensions.DependencyInjection {
                     reuse = Reuse.Singleton;
                     break;
                 case ServiceLifetime.Scoped:
-                    reuse = Reuse.InResolutionScope;
+                    reuse = Reuse.InCurrentScope;
                     break;
                 case ServiceLifetime.Transient:
                     reuse = Reuse.Transient;

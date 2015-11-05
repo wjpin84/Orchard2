@@ -10,13 +10,14 @@ using System;
 namespace Orchard.Web {
     public class Startup {
         public IServiceProvider ConfigureServices(IServiceCollection services) {
+            System.Console.ReadLine();
             services
                 .AddWebHost();
 
             services.AddModuleFolder("~/Core/Orchard.Core");
             services.AddModuleFolder("~/Modules");
 
-            IContainer container = new Container();
+            IContainer container = new Container(scopeContext: new DryIocExtension.AsyncExecutionFlowScopeContext());
             container.Populate(services);
             return container.Resolve<IServiceProvider>();
         }
