@@ -73,11 +73,15 @@ namespace DryIocExtension {
         private readonly string _currentScopeEntryKey;
     }
 
+#if DNX451
+    internal sealed class ScopeEntry<T> : MarshalByRefObject {
+#else
     internal sealed class ScopeEntry<T> {
+#endif
         public readonly T Value;
         public ScopeEntry(T value) { Value = value; }
     }
-
+    
     /// <summary>
     /// Holds some state for the current HttpContext or thread
     /// </summary>

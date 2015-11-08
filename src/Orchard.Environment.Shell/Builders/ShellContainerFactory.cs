@@ -15,11 +15,11 @@ namespace Orchard.Environment.Shell.Builders {
     public class ShellContainerFactory : IShellContainerFactory {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger _logger;
-        private readonly Container _container;
+        private readonly IContainer _container;
         private readonly ILoggerFactory _loggerFactory;
 
         public ShellContainerFactory(IServiceProvider serviceProvider,
-            Container container,
+            IContainer container,
             ILoggerFactory loggerFactory) {
             _serviceProvider = serviceProvider;
             _container = container;
