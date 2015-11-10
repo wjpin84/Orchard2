@@ -105,7 +105,7 @@ namespace DryIocExtension {
 
             if (data == null) {
                 if (_defaultValue != null) {
-                    CallContext.SetData(_name, data = _defaultValue());
+                    SetState(_defaultValue());
                     return data as T;
                 }
             }
@@ -121,13 +121,16 @@ namespace DryIocExtension {
         private readonly AsyncLocal<IDictionary<string, T>> _serviceProvider = new AsyncLocal<IDictionary<string, T>>();
 
         public T GetState() {
-            if (_serviceProvider.Value.ContainsKey(_name)) {
-                return _serviceProvider.Value[_name];
+            var provider = _serviceProvider.Value;
+
+            T value = null;
+            if (provider.TryGetValue(_name, out value)) {
+                return value;
             }
 
             if (_defaultValue != null) {
-                _serviceProvider.Value.Add(_name, _defaultValue());
-                return _serviceProvider.Value[_name];
+                SetState(_defaultValue());
+                return provider[_name];
             }
 
             return default(T);

@@ -72,7 +72,7 @@ namespace DryIoc.Extensions.DependencyInjection {
         }
 
         public object GetService(Type serviceType) {
-            return _componentContext.Resolve(serviceType, true);
+            return _componentContext.Resolve(serviceType);
         }
     }
 
