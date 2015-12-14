@@ -1,15 +1,15 @@
+using Microsoft.AspNet.Http;
+using Microsoft.Extensions.Logging;
+using Orchard.DependencyInjection;
+using Orchard.Environment.Extensions;
+using Orchard.Environment.Shell;
+using Orchard.Environment.Shell.Builders;
+using Orchard.Environment.Shell.Descriptor.Models;
+using Orchard.Environment.Shell.Models;
 using Orchard.Hosting;
+using Orchard.Hosting.ShellBuilders;
 using System;
 using System.Linq;
-using Microsoft.AspNet.Http;
-using Orchard.Environment.Extensions;
-using Orchard.Environment.Shell.Descriptor.Models;
-using Orchard.Environment.Shell.Builders;
-using Orchard.Environment.Shell;
-using Orchard.Environment.Shell.Models;
-using Orchard.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Orchard.Hosting.ShellBuilders;
 using YesSql.Core.Services;
 
 namespace Orchard.Setup.Services
@@ -24,7 +24,6 @@ namespace Orchard.Setup.Services
         private readonly IExtensionManager _extensionManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IRunningShellTable _runningShellTable;
-        private readonly ILogger _logger;
 
         public SetupService(
             ShellSettings shellSettings,
@@ -35,7 +34,7 @@ namespace Orchard.Setup.Services
             IExtensionManager extensionManager,
             IHttpContextAccessor httpContextAccessor,
             IRunningShellTable runningShellTable,
-            ILogger<SetupService> logger)
+            ILogger<SetupService> logger) : base(logger)
         {
             _shellSettings = shellSettings;
             _orchardHost = orchardHost;
@@ -45,7 +44,6 @@ namespace Orchard.Setup.Services
             _extensionManager = extensionManager;
             _httpContextAccessor = httpContextAccessor;
             _runningShellTable = runningShellTable;
-            _logger = logger;
         }
 
         public ShellSettings Prime()
@@ -71,9 +69,9 @@ namespace Orchard.Setup.Services
         {
             string executionId;
 
-            if (_logger.IsEnabled(LogLevel.Information))
+            if (Logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation("Running setup for tenant '{0}'.", _shellSettings.Name);
+	            Logger.LogInformation("Running setup for tenant '{0}'.", _shellSettings.Name);
             }
 
             // Features to enable for Setup

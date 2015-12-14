@@ -127,7 +127,9 @@ namespace Orchard.ContentManagement
             {
                 contentItem = await _session
                     .QueryAsync<ContentItem, ContentItemIndex>()
-                    .Where(x => x.ContentItemId == contentItemId && x.Latest == true)
+                    .Where(x => 
+                        x.ContentItemId == contentItemId && 
+                        x.Latest == true)
                     .FirstOrDefault();
             }
             else if (options.IsDraft && !options.IsDraftRequired)
@@ -153,7 +155,9 @@ namespace Orchard.ContentManagement
             {
                 contentItem = await _session
                     .QueryAsync<ContentItem, ContentItemIndex>()
-                    .Where(x => x.ContentItemId == contentItemId && x.Published == true)
+                    .Where(x => 
+                        x.ContentItemId == contentItemId && 
+                        x.Published == true)
                     .FirstOrDefault();
             }
 

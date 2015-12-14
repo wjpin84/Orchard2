@@ -1,6 +1,8 @@
-﻿using Orchard.DependencyInjection;
+﻿using Microsoft.Extensions.Logging;
+using Orchard.DependencyInjection;
 using Orchard.Environment.Recipes.Models;
 using Orchard.Environment.Shell.Descriptor;
+using System.Threading.Tasks;
 
 namespace Orchard.Environment.Recipes.Services
 {
@@ -12,15 +14,16 @@ namespace Orchard.Environment.Recipes.Services
         public RecipeExecutor(
             IRecipeParser recipeParser,
             IRecipeManager recipeManager,
-            IShellDescriptorManager shellDescriptorManager)
+            IShellDescriptorManager shellDescriptorManager,
+            ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _recipeManager = recipeManager;
             _shellDescriptorManager = shellDescriptorManager;
         }
 
-        public string Execute(Recipe recipe)
+        public async Task<string> Execute(Recipe recipe)
         {
-            var executionId = _recipeManager.Execute(recipe);
+            var executionId = await _recipeManager.ExecuteAsync(recipe);
 
             // Only need to update the shell if work was actually done.
             if (executionId != null)

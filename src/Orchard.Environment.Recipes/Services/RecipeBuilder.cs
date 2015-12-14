@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using Orchard.DependencyInjection;
 using Orchard.Services;
+using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Orchard.Environment.Recipes.Services
 {
@@ -10,12 +11,13 @@ namespace Orchard.Environment.Recipes.Services
     {
         private readonly IClock _clock;
 
-        public RecipeBuilder(IClock clock)
+        public RecipeBuilder(IClock clock,
+            ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _clock = clock;
         }
 
-        public XDocument Build(IEnumerable<IRecipeBuilderStep> steps)
+        public JObject Build(IEnumerable<IRecipeBuilderStep> steps)
         {
             var context = new BuildContext
             {
@@ -30,16 +32,11 @@ namespace Orchard.Environment.Recipes.Services
             return context.RecipeDocument;
         }
 
-        private XDocument CreateRecipeRoot()
+        private JObject CreateRecipeRoot()
         {
-            var recipeRoot = new XDocument(
-                new XDeclaration("1.0", "", "yes"),
-                new XComment(T("Exported from Orchard").ToString()),
-                new XElement("Orchard",
-                    new XElement("Recipe",
-                        new XElement("ExportUtc", _clock.UtcNow))
-                )
-            );
+            dynamic recipeRoot = new JObject();
+            recipeRoot._comment = T("Exported from Orchard").ToString();
+            recipeRoot.ExportUtc = _clock.UtcNow;
             return recipeRoot;
         }
     }
