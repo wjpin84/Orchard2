@@ -50,7 +50,7 @@ namespace Orchard.Tests.DisplayManagement
 
             IServiceCollection serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddScoped<ILoggerFactory, StubLoggerFactory>();
+            serviceCollection.AddScoped<ILogger<DefaultDisplayManager>, NullLogger<DefaultDisplayManager>>();
             serviceCollection.AddScoped<IHttpContextAccessor, StubHttpContextAccessor>();
             serviceCollection.AddScoped<IDisplayManager, DefaultDisplayManager>();
             serviceCollection.AddScoped<IShapeTableManager, TestShapeTableManager>();

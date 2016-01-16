@@ -1,14 +1,14 @@
-﻿using System.Reflection;
-using System.Linq;
-using Microsoft.Dnx.Compilation;
+﻿using Microsoft.Dnx.Compilation;
 using Microsoft.Dnx.Compilation.Caching;
 using Microsoft.Dnx.Runtime;
+using Microsoft.Extensions.PlatformAbstractions;
 using Orchard.DependencyInjection;
 using Orchard.Environment.Extensions.Loaders;
-using System.IO;
-using System.Collections.Generic;
-using Microsoft.Extensions.PlatformAbstractions;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace Orchard.Environment.Extensions
 {

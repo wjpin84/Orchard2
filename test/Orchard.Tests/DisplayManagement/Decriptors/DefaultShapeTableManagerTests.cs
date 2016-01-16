@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy;
@@ -43,7 +44,8 @@ namespace Orchard.Tests.DisplayManagement.Decriptors
         {
             IServiceCollection serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddScoped<ILoggerFactory, StubLoggerFactory>();
+            serviceCollection.AddScoped<ILogger<DefaultShapeTableManager>, NullLogger<DefaultShapeTableManager>>();
+            serviceCollection.AddScoped<IMemoryCache, StubMemoryCache>();
             serviceCollection.AddScoped<IFeatureManager, StubFeatureManager>();
             serviceCollection.AddScoped<IShapeTableManager, DefaultShapeTableManager>();
             serviceCollection.AddScoped<IEventBus, StubEventBus>();

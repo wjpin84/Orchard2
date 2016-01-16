@@ -4,6 +4,7 @@ using System.Linq;
 using Orchard.Environment.Extensions.Models;
 using Orchard.Environment.Extensions.Features;
 using System.Threading.Tasks;
+using Orchard.FileSystem.AppData;
 
 namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
 {
@@ -13,12 +14,15 @@ namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
     public class ShapePlacementParsingStrategy : IShapeTableProvider
     {
         private readonly IFeatureManager _featureManager;
+        private readonly IOrchardFileSystem _orchardFileSystem;
         private readonly IPlacementFileParser _placementFileParser;
 
         public ShapePlacementParsingStrategy(
             IFeatureManager featureManager,
+            IOrchardFileSystem orchardFileSystem,
             IPlacementFileParser placementFileParser)
         {
+            _orchardFileSystem = orchardFileSystem;
             _featureManager = featureManager;
             _placementFileParser = placementFileParser;
         }
@@ -34,8 +38,8 @@ namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
 
         private void ProcessFeatureDescriptor(ShapeTableBuilder builder, FeatureDescriptor featureDescriptor)
         {
-            var virtualPath = featureDescriptor.Extension.Location + "/" + featureDescriptor.Extension.Id + "/Placement.info";
-            var placementFile = _placementFileParser.Parse(virtualPath);
+            var virtualPath = _orchardFileSystem.Combine(featureDescriptor.Extension.Location, featureDescriptor.Extension.Id, "Placement.info");
+            var placementFile = _placementFileParser.Load(virtualPath);
             if (placementFile != null)
             {
                 ProcessPlacementFile(builder, featureDescriptor, placementFile);
@@ -105,7 +109,7 @@ namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
                         // generate 'debugging' information to trace which file originated the actual location
                         if (hit)
                         {
-                            var virtualPath = featureDescriptor.Extension.Location + "/" + featureDescriptor.Extension.Id + "/Placement.info";
+                            var virtualPath = _orchardFileSystem.Combine(featureDescriptor.Extension.Location, featureDescriptor.Extension.Id, "Placement.info");
                             ctx.Source = virtualPath;
                         }
                         return hit;

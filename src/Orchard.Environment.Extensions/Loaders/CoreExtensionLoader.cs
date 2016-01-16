@@ -6,26 +6,27 @@ using Orchard.DependencyInjection;
 using Orchard.Environment.Extensions.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Orchard.FileSystem.AppData;
 
 namespace Orchard.Environment.Extensions.Loaders
 {
     public class CoreExtensionLoader : IExtensionLoader
     {
         private const string CoreAssemblyName = "Orchard.Core";
-        private readonly IHostEnvironment _hostEnvironment;
         private readonly IAssemblyLoaderContainer _loaderContainer;
         private readonly IExtensionAssemblyLoader _extensionAssemblyLoader;
+        private readonly IOrchardFileSystem _orchardFileSystem;
         private readonly ILogger _logger;
 
         public CoreExtensionLoader(
-            IHostEnvironment hostEnvironment,
             IAssemblyLoaderContainer container,
             IExtensionAssemblyLoader extensionAssemblyLoader,
+            IOrchardFileSystem orchardFileSystem,
             ILogger<CoreExtensionLoader> logger)
         {
-            _hostEnvironment = hostEnvironment;
             _loaderContainer = container;
             _extensionAssemblyLoader = extensionAssemblyLoader;
+            _orchardFileSystem = orchardFileSystem;
             _logger = logger;
         }
 
@@ -48,12 +49,12 @@ namespace Orchard.Environment.Extensions.Loaders
 
         public ExtensionEntry Load(ExtensionDescriptor descriptor)
         {
-            if (!descriptor.Location.StartsWith("~/Core/"))
+            if (!descriptor.Location.StartsWith("Core/"))
             {
                 return null;
             }
 
-            var plocation = _hostEnvironment.MapPath("~/Core");
+            var plocation = _orchardFileSystem.MapPath("Core");
 
             using (_loaderContainer.AddLoader(_extensionAssemblyLoader.WithPath(plocation)))
             {

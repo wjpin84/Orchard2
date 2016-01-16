@@ -41,11 +41,11 @@ namespace Orchard.Environment.Shell
                 }
                 var configurationContainer =
                     new ConfigurationBuilder()
-                        .AddJsonFile(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "json")),
+                        .AddJsonFile(_appDataFolder.MapPath(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "json"))),
                             true)
-                        .AddXmlFile(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "xml")),
+                        .AddXmlFile(_appDataFolder.MapPath(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "xml"))),
                             true)
-                        .AddYamlFile(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "txt")),
+                        .AddYamlFile(_appDataFolder.MapPath(_appDataFolder.Combine(tenant.PhysicalPath, string.Format(SettingsFileNameFormat, "txt"))),
                             false);
 
                 var config = configurationContainer.Build();

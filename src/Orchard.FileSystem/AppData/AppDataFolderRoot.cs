@@ -1,17 +1,15 @@
-﻿using Orchard.Environment;
-
-namespace Orchard.FileSystem.AppData
+﻿namespace Orchard.FileSystem.AppData
 {
     public class AppDataFolderRoot : IAppDataFolderRoot
     {
-        private readonly IHostEnvironment _hostEnvironment;
-        public AppDataFolderRoot(IHostEnvironment hostEnvironment)
+        private readonly IOrchardFileSystem _fileSystem;
+        public AppDataFolderRoot(IOrchardFileSystem fileSystem)
         {
-            _hostEnvironment = hostEnvironment;
+            _fileSystem = fileSystem;
         }
 
-        public string RootPath => "~/App_Data";
+        public string RootPath => "App_Data";
 
-        public string RootFolder => _hostEnvironment.MapPath(RootPath);
+        public string RootFolder => _fileSystem.MapPath(RootPath);
     }
 }

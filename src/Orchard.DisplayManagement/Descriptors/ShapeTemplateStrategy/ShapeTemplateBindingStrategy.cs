@@ -12,7 +12,6 @@ using Orchard.DisplayManagement.Implementation;
 using Orchard.Environment.Extensions;
 using Orchard.Environment.Extensions.Models;
 using Orchard.Environment.Extensions.Features;
-using Orchard.FileSystem.VirtualPath;
 using Orchard.Utility;
 using System;
 using System.Collections.Concurrent;
@@ -20,12 +19,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Orchard.FileSystem.AppData;
 
 namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
 {
     public class ShapeTemplateBindingStrategy : IShapeTableProvider
     {
-        private readonly IVirtualPathProvider _virtualPathProvider;
+        private readonly IOrchardFileSystem _fileSystem;
         private readonly IEnumerable<IShapeTemplateHarvester> _harvesters;
         private readonly IEnumerable<IShapeTemplateViewEngine> _shapeTemplateViewEngines;
         private readonly IOptions<MvcViewOptions> _viewEngine;
@@ -36,7 +36,7 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
         public ShapeTemplateBindingStrategy(
             IEnumerable<IShapeTemplateHarvester> harvesters,
             IFeatureManager featureManager,
-            IVirtualPathProvider virtualPathProvider,
+            IOrchardFileSystem fileSystem,
             IEnumerable<IShapeTemplateViewEngine> shapeTemplateViewEngines,
             IOptions<MvcViewOptions> options,
             IActionContextAccessor actionContextAccessor,
@@ -44,7 +44,7 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
         {
             _harvesters = harvesters;
             _featureManager = featureManager;
-            _virtualPathProvider = virtualPathProvider;
+            _fileSystem = fileSystem;
             _shapeTemplateViewEngines = shapeTemplateViewEngines;
             _viewEngine = options;
             _actionContextAccessor = actionContextAccessor;
@@ -78,15 +78,15 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
                 }
                 var pathContexts = harvesterInfos.SelectMany(harvesterInfo => harvesterInfo.subPaths.Select(subPath =>
                 {
-                    var basePath = Path.Combine(extensionDescriptor.Location, extensionDescriptor.Id).Replace(Path.DirectorySeparatorChar, '/');
-                    var virtualPath = Path.Combine(basePath, subPath).Replace(Path.DirectorySeparatorChar, '/');
+                    var basePath = _fileSystem.Combine(extensionDescriptor.Location, extensionDescriptor.Id);
+                    var virtualPath = _fileSystem.Combine(basePath, subPath);
                     IReadOnlyList<string> fileNames;
 
-                    if (!_virtualPathProvider.DirectoryExists(virtualPath))
+                    if (!_fileSystem.DirectoryExists(virtualPath))
                         fileNames = new List<string>();
                     else
                     {
-                        fileNames = _virtualPathProvider.ListFiles(virtualPath).Select(Path.GetFileName).ToReadOnlyCollection();
+                        fileNames = _fileSystem.ListFiles(virtualPath).Select(x => x.Name).ToReadOnlyCollection();
                     }
 
                     return new { harvesterInfo.harvester, basePath, subPath, virtualPath, fileNames };
@@ -102,7 +102,7 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
                         fileName => new
                         {
                             fileName = Path.GetFileNameWithoutExtension(fileName),
-                            fileVirtualPath = Path.Combine(pathContext.virtualPath, fileName).Replace(Path.DirectorySeparatorChar, '/'),
+                            fileVirtualPath = _fileSystem.Combine(pathContext.virtualPath, fileName),
                             pathContext
                         });
                 }));

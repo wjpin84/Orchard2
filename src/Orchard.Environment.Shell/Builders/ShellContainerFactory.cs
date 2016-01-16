@@ -4,7 +4,6 @@ using Orchard.DependencyInjection;
 using Orchard.Environment.Extensions;
 using Orchard.Environment.Shell.Builders.Models;
 using Orchard.Events;
-using Orchard.FileSystem.AppData;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,21 +21,18 @@ namespace Orchard.Environment.Shell.Builders
     public class ShellContainerFactory : IShellContainerFactory
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger _logger;
-        private readonly ILoggerFactory _loggerFactory;
-        private readonly IAppDataFolderRoot _appDataFolderRoot;
         private readonly IServiceCollection _applicationServices;
+        private readonly ILoggerFactory _loggerFactory;
+        private readonly ILogger _logger;
 
         public ShellContainerFactory(
             IServiceProvider serviceProvider,
+            IServiceCollection applicationServices,
             ILoggerFactory loggerFactory,
-            ILogger<ShellContainerFactory> logger,
-            IAppDataFolderRoot appDataFolderRoot,
-            IServiceCollection applicationServices)
+            ILogger<ShellContainerFactory> logger)
         {
-            _applicationServices = applicationServices;
             _serviceProvider = serviceProvider;
-            _appDataFolderRoot = appDataFolderRoot;
+            _applicationServices = applicationServices;
             _loggerFactory = loggerFactory;
             _logger = logger;
         }

@@ -7,29 +7,30 @@ using Microsoft.Extensions.Logging;
 using Orchard.Environment.Extensions.Folders;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
+using Orchard.FileSystem.AppData;
 
 namespace Orchard.Environment.Extensions.Loaders
 {
     public class DynamicExtensionLoader : IExtensionLoader
     {
         private readonly string[] ExtensionsSearchPaths;
-
-        private readonly IHostEnvironment _hostEnvironment;
+        
         private readonly IAssemblyLoaderContainer _loaderContainer;
         private readonly IExtensionAssemblyLoader _extensionAssemblyLoader;
+        private readonly IOrchardFileSystem _orchardFileSystem;
         private readonly ILogger _logger;
 
         public DynamicExtensionLoader(
             IOptions<ExtensionHarvestingOptions> optionsAccessor,
-            IHostEnvironment hostEnvironment,
             IAssemblyLoaderContainer container,
             IExtensionAssemblyLoader extensionAssemblyLoader,
+            IOrchardFileSystem orchardFileSystem,
             ILogger<DynamicExtensionLoader> logger)
         {
             ExtensionsSearchPaths = optionsAccessor.Value.ModuleLocationExpanders.SelectMany(x => x.SearchPaths).ToArray();
-            _hostEnvironment = hostEnvironment;
             _loaderContainer = container;
             _extensionAssemblyLoader = extensionAssemblyLoader;
+            _orchardFileSystem = orchardFileSystem;
             _logger = logger;
         }
 
@@ -57,7 +58,7 @@ namespace Orchard.Environment.Extensions.Loaders
                 return null;
             }
 
-            var plocation = _hostEnvironment.MapPath(descriptor.Location);
+            var plocation = _orchardFileSystem.MapPath(descriptor.Location);
 
             using (_loaderContainer.AddLoader(_extensionAssemblyLoader.WithPath(plocation)))
             {

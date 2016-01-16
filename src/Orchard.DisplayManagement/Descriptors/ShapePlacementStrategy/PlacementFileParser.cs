@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Orchard.DependencyInjection;
+using Orchard.FileSystem.AppData;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Orchard.FileSystem;
-using Orchard.DependencyInjection;
 
 namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
 {
@@ -11,34 +11,46 @@ namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
     /// </summary>
     public interface IPlacementFileParser : IDependency
     {
-        PlacementFile Parse(string virtualPath);
+        PlacementFile Load(string filePath);
         PlacementFile ParseText(string placementText);
     }
 
 
     public class PlacementFileParser : IPlacementFileParser
     {
-        private readonly IClientFolder _webSiteFolder;
+        private readonly IOrchardFileSystem _fileSystem;
 
-        public PlacementFileParser(IClientFolder webSiteFolder)
+        public PlacementFileParser(IOrchardFileSystem fileSystem)
         {
-            _webSiteFolder = webSiteFolder;
+            _fileSystem = fileSystem;
         }
 
         public bool DisableMonitoring { get; set; }
 
-        public PlacementFile Parse(string virtualPath)
+        public PlacementFile Load(string path)
         {
-            var placementText = _webSiteFolder.ReadFile(virtualPath);
-            return ParseText(placementText);
+            var file = _fileSystem.GetFileInfo(path);
+
+            if (!file.Exists)
+            {
+                return null;
+            }
+
+            using (var stream = file.CreateReadStream()) {
+                var element = XElement.Load(stream);
+
+                return new PlacementFile
+                {
+                    Nodes = Accept(element).ToList()
+                };
+            }
         }
 
         public PlacementFile ParseText(string placementText)
         {
             if (placementText == null)
                 return null;
-
-
+            
             var element = XElement.Parse(placementText);
             return new PlacementFile
             {

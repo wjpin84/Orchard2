@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Orchard.Localization;
+﻿using Microsoft.Extensions.Logging;
 using Orchard.Environment.Extensions.Folders;
 using Orchard.Environment.Extensions.Loaders;
 using Orchard.Environment.Extensions.Models;
-using Orchard.Utility;
-using Microsoft.Extensions.Logging;
 using Orchard.Environment.Extensions.Utility;
-using System.Threading.Tasks;
+using Orchard.Localization;
+using Orchard.Utility;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Orchard.Environment.Extensions
 {
@@ -18,10 +18,10 @@ namespace Orchard.Environment.Extensions
         private readonly IExtensionLocator _extensionLocator;
         private readonly IEnumerable<IExtensionLoader> _loaders;
         private readonly ILogger _logger;
-        private List<ExtensionDescriptor> _availableExtensions;
-        private List<FeatureDescriptor> _availableFeatures;
+        private IList<ExtensionDescriptor> _availableExtensions;
+        private IList<FeatureDescriptor> _availableFeatures;
 
-        private Dictionary<string, Feature> _features = new Dictionary<string, Feature>();
+        private ConcurrentDictionary<string, Feature> _features = new ConcurrentDictionary<string, Feature>();
 
         public Localizer T { get; set; }
 
@@ -109,7 +109,9 @@ namespace Orchard.Environment.Extensions
             }
 
             var result = featureDescriptors
-                .Select(descriptor => LoadFeature(descriptor))
+                .Select(descriptor => 
+                    _features.GetOrAdd(descriptor.Id, LoadFeature(descriptor))
+                )
                 .ToArray();
 
             if (_logger.IsEnabled(LogLevel.Information))
@@ -121,74 +123,54 @@ namespace Orchard.Environment.Extensions
 
         private Feature LoadFeature(FeatureDescriptor featureDescriptor)
         {
-            lock(_features)
+            if (_logger.IsEnabled(LogLevel.Information))
             {
-                if (_logger.IsEnabled(LogLevel.Information))
-                {
-                    _logger.LogInformation("Loading feature {0}", featureDescriptor.Name);
-                }
+                _logger.LogInformation("Loading feature {0}", featureDescriptor.Name);
+            }
 
-                if(_features.ContainsKey(featureDescriptor.Id))
-                {
-                    if (_logger.IsEnabled(LogLevel.Debug))
-                    {
-                        _logger.LogDebug("Feature {0} loaded from cache", featureDescriptor.Name);
-                    }
+            var extensionDescriptor = featureDescriptor.Extension;
+            var featureId = featureDescriptor.Id;
+            var extensionId = extensionDescriptor.Id;
 
-                    return _features[featureDescriptor.Id];
-                }
+            ExtensionEntry extensionEntry;
+            try
+            {
+                extensionEntry = BuildEntry(extensionDescriptor);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(string.Format("Error loading extension '{0}'", extensionId), ex);
+                throw new OrchardException(T("Error while loading extension '{0}'.", extensionId), ex);
+            }
 
-                var extensionDescriptor = featureDescriptor.Extension;
-                var featureId = featureDescriptor.Id;
-                var extensionId = extensionDescriptor.Id;
-
-                ExtensionEntry extensionEntry;
-                try
-                {
-                    extensionEntry = BuildEntry(extensionDescriptor);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(string.Format("Error loading extension '{0}'", extensionId), ex);
-                    throw new OrchardException(T("Error while loading extension '{0}'.", extensionId), ex);
-                }
-
-                Feature feature;
-                if (extensionEntry == null)
-                {
-                    // If the feature could not be compiled for some reason,
-                    // return a "null" feature, i.e. a feature with no exported types.
-                    feature = new Feature
-                    {
-                        Descriptor = featureDescriptor,
-                        ExportedTypes = Enumerable.Empty<Type>()
-                    };
-
-                    _features.Add(featureDescriptor.Id, feature);
-                    return feature;
-                }
-
-                var extensionTypes = extensionEntry.ExportedTypes.Where(t => t.GetTypeInfo().IsClass && !t.GetTypeInfo().IsAbstract);
-                var featureTypes = new List<Type>();
-
-                foreach (var type in extensionTypes)
-                {
-                    string sourceFeature = GetSourceFeatureNameForType(type, extensionId);
-                    if (String.Equals(sourceFeature, featureId, StringComparison.OrdinalIgnoreCase))
-                    {
-                        featureTypes.Add(type);
-                    }
-                }
-
-                feature = new Feature
+            if (extensionEntry == null)
+            {
+                // If the feature could not be compiled for some reason,
+                // return a "null" feature, i.e. a feature with no exported types.
+                return new Feature
                 {
                     Descriptor = featureDescriptor,
-                    ExportedTypes = featureTypes
+                    ExportedTypes = Enumerable.Empty<Type>()
                 };
-
-                _features.Add(featureDescriptor.Id, feature);
-                return feature;
             }
+
+            var extensionTypes = extensionEntry.ExportedTypes.Where(t => t.GetTypeInfo().IsClass && !t.GetTypeInfo().IsAbstract);
+            var featureTypes = new List<Type>();
+
+            foreach (var type in extensionTypes)
+            {
+                string sourceFeature = GetSourceFeatureNameForType(type, extensionId);
+                if (string.Equals(sourceFeature, featureId, StringComparison.OrdinalIgnoreCase))
+                {
+                    featureTypes.Add(type);
+                }
+            }
+
+            return new Feature
+            {
+                Descriptor = featureDescriptor,
+                ExportedTypes = featureTypes
+            };
         }
 
         private static string GetSourceFeatureNameForType(Type type, string extensionId)
