@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Orchard.Environment.Extensions.Features;
+using Orchard.Environment.Extensions.Models;
+using Orchard.FileSystem.AppData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Orchard.Environment.Extensions.Models;
-using Orchard.Environment.Extensions.Features;
-using System.Threading.Tasks;
-using Orchard.FileSystem.AppData;
 
 namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy
 {

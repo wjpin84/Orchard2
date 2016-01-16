@@ -4,6 +4,7 @@ using Microsoft.Dnx.Runtime;
 using Microsoft.Extensions.PlatformAbstractions;
 using Orchard.DependencyInjection;
 using Orchard.Environment.Extensions.Loaders;
+using Orchard.FileSystem.AppData;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,14 +22,17 @@ namespace Orchard.Environment.Extensions
         private readonly IRuntimeEnvironment _runtimeEnvironment;
         private readonly IOrchardLibraryManager _libraryManager;
         private string _path;
+        private readonly IOrchardFileSystem _fileSystem;
 
         public ExtensionAssemblyLoader(
             IApplicationEnvironment applicationEnvironment,
             //ICache cache,
             IAssemblyLoadContextAccessor assemblyLoadContextAccessor,
             IRuntimeEnvironment runtimeEnvironment,
+            IOrchardFileSystem fileSystem,
             IOrchardLibraryManager libraryManager)
         {
+            _fileSystem = fileSystem;
             _applicationEnvironment = applicationEnvironment;
             //_cache = cache;
             _assemblyLoadContextAccessor = assemblyLoadContextAccessor;
@@ -57,14 +61,16 @@ namespace Orchard.Environment.Extensions
                 return assembly;
             }
 
-            var projectPath = Path.Combine(_path, assemblyName.Name);
-            if (!Project.HasProjectFile(projectPath))
+            var projectFileInfo = _fileSystem
+                .GetFileInfo(_fileSystem.Combine(_path, assemblyName.Name));
+
+            if (!Project.HasProjectFile(projectFileInfo.PhysicalPath))
             {
                 return null;
             }
 
             var moduleContext = new ModuleLoaderContext(
-                projectPath,
+                projectFileInfo.PhysicalPath,
                 _applicationEnvironment.RuntimeFramework);
 
             foreach (var lib in moduleContext.LibraryManager.GetLibraries())
