@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Orchard.Environment.Recipes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Orchard.Environment.Recipes.Models;
-using Orchard.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace Orchard.Environment.Recipes.Services

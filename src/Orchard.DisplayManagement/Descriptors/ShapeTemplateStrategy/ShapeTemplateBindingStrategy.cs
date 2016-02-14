@@ -80,13 +80,15 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy
                 {
                     var basePath = Path.Combine(extensionDescriptor.Location, extensionDescriptor.Id).Replace(Path.DirectorySeparatorChar, '/');
                     var virtualPath = Path.Combine(basePath, subPath).Replace(Path.DirectorySeparatorChar, '/');
-                    IReadOnlyList<string> fileNames;
+                    IEnumerable<string> fileNames;
 
-                    if (!_virtualPathProvider.DirectoryExists(virtualPath))
-                        fileNames = new List<string>();
+                    var path = _virtualPathProvider.MapPath(virtualPath);
+
+                    if (!Directory.Exists(path))
+                        fileNames = Enumerable.Empty<string>();
                     else
                     {
-                        fileNames = _virtualPathProvider.ListFiles(virtualPath).Select(Path.GetFileName).ToReadOnlyCollection();
+                        fileNames = Directory.EnumerateFiles(path).Select(Path.GetFileName).ToReadOnlyCollection();
                     }
 
                     return new { harvesterInfo.harvester, basePath, subPath, virtualPath, fileNames };

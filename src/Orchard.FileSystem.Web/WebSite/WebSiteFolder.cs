@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -24,12 +25,13 @@ namespace Orchard.FileSystem.WebSite
 
         public IEnumerable<string> ListDirectories(string virtualPath)
         {
-            if (!_virtualPathProvider.DirectoryExists(virtualPath))
+            var path = _virtualPathProvider.MapPath(virtualPath);
+            if (!Directory.Exists(path))
             {
                 return Enumerable.Empty<string>();
             }
 
-            return _virtualPathProvider.ListDirectories(virtualPath);
+            return Directory.EnumerateDirectories(path);
         }
 
         private IEnumerable<string> ListFiles(IEnumerable<string> directories)
@@ -39,11 +41,18 @@ namespace Orchard.FileSystem.WebSite
 
         public IEnumerable<string> ListFiles(string virtualPath, bool recursive)
         {
+            return ListFiles(virtualPath, recursive, "*.*");
+        }
+
+        public IEnumerable<string> ListFiles(string virtualPath, bool recursive, string pattern)
+        {
+            var path = _virtualPathProvider.MapPath(virtualPath);
+
             if (!recursive)
             {
-                return _virtualPathProvider.ListFiles(virtualPath);
+                return Directory.EnumerateFiles(path, pattern, SearchOption.TopDirectoryOnly);
             }
-            return _virtualPathProvider.ListFiles(virtualPath).Concat(ListFiles(ListDirectories(virtualPath)));
+            return Directory.EnumerateFiles(path, pattern, SearchOption.AllDirectories);
         }
 
         public bool FileExists(string virtualPath)

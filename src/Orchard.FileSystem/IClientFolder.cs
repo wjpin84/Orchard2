@@ -10,6 +10,7 @@ namespace Orchard.FileSystem
     {
         IEnumerable<string> ListDirectories(string virtualPath);
         IEnumerable<string> ListFiles(string virtualPath, bool recursive);
+        IEnumerable<string> ListFiles(string virtualPath, bool recursive, string searchPattern);
 
         bool FileExists(string virtualPath);
         string ReadFile(string virtualPath);

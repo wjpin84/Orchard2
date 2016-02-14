@@ -6,6 +6,6 @@ namespace Orchard.Environment.Recipes.Services
     public interface IRecipeManager
     {
         Task<string> ExecuteAsync(Recipe recipe);
-        void ExecuteRecipeStep(string executionId, RecipeStep recipeStep);
+        Task ExecuteRecipeStepAsync(string executionId, Recipe recipe, RecipeStep recipeStep);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Orchard.FileSystem;
-using Microsoft.AspNet.Http;
 
 namespace Orchard.Tests.Stubs
 {
@@ -51,6 +50,11 @@ namespace Orchard.Tests.Stubs
         public void CopyFileTo(string virtualPath, Stream destination, bool actualContent)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> ListFiles(string virtualPath, bool recursive, string searchPattern)
+        {
+            return ListFiles(virtualPath, recursive);
         }
     }
 }

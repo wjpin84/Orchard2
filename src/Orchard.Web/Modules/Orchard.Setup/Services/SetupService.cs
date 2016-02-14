@@ -1,8 +1,6 @@
-using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using Orchard.Data.Migration;
 using Orchard.DependencyInjection;
 using Orchard.Environment.Extensions;
 using Orchard.Environment.Recipes.Models;
@@ -186,7 +184,7 @@ namespace Orchard.Setup.Services
                 "ActivateShell",
                 activateShellJSteps);
 
-            recipeManager.ExecuteRecipeStep(executionId, activateShellStep);
+            recipeManager.ExecuteRecipeStepAsync(executionId, recipe, activateShellStep).Wait();
 
             return executionId;
         }

@@ -12,8 +12,8 @@ namespace Orchard.Recipes.Services
 {
     public class RecipeScheduler : IRecipeScheduler, IRecipeSchedulerEventHandler
     {
-        private readonly IProcessingEngine _processingEngine;
         private readonly ShellSettings _shellSettings;
+        private readonly IProcessingEngine _processingEngine;
         private readonly IShellDescriptorManager _shellDescriptorManager;
         private readonly IRecipeStepExecutor _recipeStepExecutor;
         private readonly IEventBus _events;
@@ -23,14 +23,15 @@ namespace Orchard.Recipes.Services
         private readonly ContextState<string> _executionIds = new ContextState<string>("executionid");
 
         public RecipeScheduler(
-            IProcessingEngine processingEngine,
             ShellSettings shellSettings,
+            IProcessingEngine processingEngine,
             IShellDescriptorManager shellDescriptorManager,
             IRecipeStepExecutor recipeStepExecutor,
             IEventBus events,
-            ILogger<RecipeScheduler> logger) {
-            _processingEngine = processingEngine;
+            ILogger<RecipeScheduler> logger)
+        {
             _shellSettings = shellSettings;
+            _processingEngine = processingEngine;
             _shellDescriptorManager = shellDescriptorManager;
             _recipeStepExecutor = recipeStepExecutor;
             _events = events;

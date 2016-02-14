@@ -9,7 +9,7 @@ namespace Orchard.Recipes
     {
         public void Configure(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IRecipeHarvester, RecipeHarvester>();
+            serviceCollection.AddScoped<IRecipeHarvester, RecipeInfoHarvester>();
             serviceCollection.AddScoped<IRecipeManager, RecipeManager>();
             serviceCollection.AddScoped<IRecipeParser, RecipeParser>();
             serviceCollection.AddScoped<IRecipeStepExecutor, RecipeStepExecutor>();

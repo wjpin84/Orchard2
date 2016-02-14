@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Orchard.Environment.Recipes.Models
 {
-    public class Recipe
-    {
+    public abstract class Recipe {
         public string Name { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }
@@ -14,6 +14,8 @@ namespace Orchard.Environment.Recipes.Models
         public DateTime? ExportUtc { get; set; }
         public string Category { get; set; }
         public string Tags { get; set; }
-        public IEnumerable<RecipeStep> RecipeSteps { get; set; }
+
+        [JsonIgnore]
+        public abstract IEnumerable<RecipeStep> Steps { get; set; }
     }
 }

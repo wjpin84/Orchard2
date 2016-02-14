@@ -6,7 +6,6 @@ using Orchard.Environment.Recipes.Services;
 using Orchard.Environment.Shell.State;
 using Orchard.Events;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using YesSql.Core.Services;
 
@@ -38,17 +37,6 @@ namespace Orchard.Recipes.Services
 
         public async Task<string> ExecuteAsync(Recipe recipe)
         {
-            if (recipe == null)
-            {
-                throw new ArgumentNullException("recipe");
-            }
-
-            if (!recipe.RecipeSteps.Any())
-            {
-                _logger.LogInformation("Recipe '{0}' contains no steps. No work has been scheduled.", recipe.Name);
-                return null;
-            }
-
             var executionId = Guid.NewGuid().ToString("n");
 
             _executionIds.SetState(executionId);
@@ -60,9 +48,9 @@ namespace Orchard.Recipes.Services
                     .NotifyAsync<IRecipeExecuteEventHandler>(x => x.ExecutionStart(executionId, recipe))
                     .Wait();
 
-                foreach (var recipeStep in recipe.RecipeSteps)
+                foreach (var recipeStep in recipe.Steps)
                 {
-                    ExecuteRecipeStep(executionId, recipeStep);
+                    await ExecuteRecipeStepAsync(executionId, recipe, recipeStep);
                 }
                 await _recipeScheduler.ScheduleWork(executionId);
 
@@ -74,16 +62,18 @@ namespace Orchard.Recipes.Services
             }
         }
 
-        public void ExecuteRecipeStep(string executionId, RecipeStep recipeStep)
+        public async Task ExecuteRecipeStepAsync(string executionId, Recipe recipe, RecipeStep recipeStep)
         {
-            _recipeStepQueue.Enqueue(executionId, recipeStep);
+            _recipeStepQueue.Enqueue(executionId, recipe, recipeStep);
             _session.Save(new RecipeStepResult
             {
                 ExecutionId = executionId,
-                RecipeName = recipeStep.RecipeName,
+                RecipeName = recipe.Name,
                 StepId = recipeStep.Id,
                 StepName = recipeStep.Name
             });
+
+            await Task.CompletedTask;
         }
     }
 }

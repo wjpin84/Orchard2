@@ -30,7 +30,7 @@ namespace Orchard.Recipes.Providers.RecipeHandlers
             {
                 _logger.LogInformation("Executing recipe step '{0}'.", recipeContext.RecipeStep.Name);
                 executionStep.Execute(recipeExecutionContext);
-                _logger.LogInformation("Finished executing recipe step '{0}'.", recipeContext.RecipeStep.Name);
+                _logger.LogInformation("Executed recipe step '{0}'.", recipeContext.RecipeStep.Name);
                 recipeContext.Executed = true;
             }
         }

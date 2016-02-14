@@ -9,7 +9,6 @@ namespace Orchard.FileSystem
         {
             services.AddSingleton<IAppDataFolderRoot, AppDataFolderRoot>();
             services.AddSingleton<IAppDataFolder, PhysicalAppDataFolder>();
-
             return services;
         }
     }
