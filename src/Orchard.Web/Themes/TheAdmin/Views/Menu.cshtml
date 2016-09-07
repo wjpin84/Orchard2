@@ -1,0 +1,17 @@
+﻿@{
+    TagBuilder tag = Tag(Model, "ul");
+
+
+    foreach (var item in Model.Items)
+    {
+        tag.InnerHtml.AppendHtml(Display(item));
+    }
+}
+
+    <nav id="mp-menu" class="mp-menu">
+        <div class="mp-level">
+            <h2 class="world">Orchard</h2>
+            @tag
+        </div>
+    </nav>
+    <!-- Menu rendered on @DateTime.UtcNow.ToString("r") -->

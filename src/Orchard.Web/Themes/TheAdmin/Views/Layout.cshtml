@@ -20,44 +20,56 @@
 </head>
 <body>
     <div class="ta-wrapper">
+        <div class="mp-pusher" id="mp-pusher">
 
-        <div class="ta-navbar-top">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Orchard</a>
-            </div>
-
-
-            <div class="navbar-content">
-                @await RenderSectionAsync("NavbarTop", required: false)
-
-                <!-- Example of pulled navbar -->
-                <ul class="nav navbar-nav navbar-ri pull-xs-right">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="ta-left-sidebar">
+            @*    <div class="ta-left-sidebar">*@
             @await RenderSectionAsync("Navigation", required: false)
+            @*</div>*@
+
+            <div class="ta-container">
+                <div class="ta-navbar-top">
+                    <div class="navbar-header">
+                        <span id="trigger" class="navbar-brand"></span>
+                    </div>
+
+
+                    <div class="navbar-content">
+                        @await RenderSectionAsync("NavbarTop", required: false)
+
+                        <!-- Example of pulled navbar -->
+                        <ul class="nav navbar-nav navbar-ri pull-xs-right">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ta-content">
+                    @await RenderSectionAsync("Messages", required: false)
+                    @RenderBody()
+                </div>
+            </div>
+
+
         </div>
 
-        <div class="ta-content">
-            @await RenderSectionAsync("Messages", required: false)
 
-            @RenderBody()
-        </div>
 
     </div><!-- /.ta-wrapper -->
 
     @await RenderSectionAsync("Footer", required: false)
 
-    <div id="confirmRemoveMessage" data-value="@T["Are you sure you want to remove this element?"]"/>
+    <div id="confirmRemoveMessage" data-value="@T["Are you sure you want to remove this element?"]" style="display:none"/>
 
     <resources type="Footer" />
-</body>
+
+    <script type="text/javascript">
+        new mlPushMenu(document.getElementById('mp-menu'), document.getElementById('trigger'), {
+            //type: 'cover'
+        });
+    </script></body>
 </html>

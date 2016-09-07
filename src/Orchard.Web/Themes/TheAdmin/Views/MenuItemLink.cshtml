@@ -1,0 +1,12 @@
+﻿@{
+    TagBuilder tag = Tag(Model, "a");
+    if(Model.HasItems)
+    {
+        tag.AddCssClass("icon icon-display");
+    }
+
+    tag.Attributes["href"] = Model.Href ?? "#";
+    tag.InnerHtml.Append(Model.Text);
+}
+
+@tag

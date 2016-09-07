@@ -11,6 +11,7 @@
       "../../Modules/Orchard.Resources/Assets/jQuery/jquery-3.1.0.js",
       "../../Modules/Orchard.Resources/Assets/Bootstrap/Js/tether.js",
       "../../Modules/Orchard.Resources/Assets/Bootstrap/Js/bootstrap.js",
+      "Assets/js/mp/*.js",
       "Assets/js/*.js"
     ],
     "output": "Scripts/TheAdmin.js"

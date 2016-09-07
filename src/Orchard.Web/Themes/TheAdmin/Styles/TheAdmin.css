@@ -625,12 +625,12 @@ pre {
     .container {
       max-width: 1140px; } }
 
-.container-fluid, .ta-wrapper .ta-content {
+.container-fluid, .ta-wrapper .ta-container {
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px; }
-  .container-fluid::after, .ta-wrapper .ta-content::after {
+  .container-fluid::after, .ta-wrapper .ta-container::after {
     content: "";
     display: table;
     clear: both; }
@@ -2689,40 +2689,27 @@ input[type="button"].btn-block {
   .custom-file-control:lang(en)::before {
     content: "Browse"; }
 
-.nav, .ta-left-sidebar nav .menu-admin {
+.nav {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none; }
 
-.nav-link, .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .menu-admin > li > ul li a {
+.nav-link {
   display: inline-block; }
-  .nav-link:focus, .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .nav-link:hover, .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li a:hover {
+  .nav-link:focus, .nav-link:hover {
     text-decoration: none; }
-  .nav-link.disabled, .ta-left-sidebar nav .menu-admin > li > a.disabled, .ta-left-sidebar nav .menu-admin > li > ul li a.disabled {
+  .nav-link.disabled {
     color: #818a91; }
-    .nav-link.disabled, .ta-left-sidebar nav .menu-admin > li > a.disabled, .ta-left-sidebar nav .menu-admin > li > ul li a.disabled, .nav-link.disabled:focus, .ta-left-sidebar nav .menu-admin > li > a.disabled:focus, .ta-left-sidebar nav .menu-admin > li > ul li a.disabled:focus, .nav-link.disabled:hover, .ta-left-sidebar nav .menu-admin > li > a.disabled:hover, .ta-left-sidebar nav .menu-admin > li > ul li a.disabled:hover {
+    .nav-link.disabled, .nav-link.disabled:focus, .nav-link.disabled:hover {
       color: #818a91;
       cursor: not-allowed;
       background-color: transparent; }
 
-.nav-inline .nav-item, .nav-inline .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .nav-inline li {
+.nav-inline .nav-item {
   display: inline-block; }
 
-.nav-inline .nav-item + .nav-item, .nav-inline .ta-left-sidebar nav .menu-admin li + .nav-item, .ta-left-sidebar nav .menu-admin .nav-inline li + .nav-item, .nav-inline .ta-left-sidebar nav .menu-admin .nav-item + li, .ta-left-sidebar nav .menu-admin .nav-inline .nav-item + li, .nav-inline .ta-left-sidebar nav .menu-admin li + li, .ta-left-sidebar nav .menu-admin .nav-inline li + li,
-.nav-inline .nav-link + .nav-link,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > a + .nav-link, .ta-left-sidebar nav
-.nav-inline .menu-admin > li > a + .nav-link,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > ul li a + .nav-link, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-inline a + .nav-link,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > .nav-link + a, .ta-left-sidebar nav
-.nav-inline .menu-admin > li > .nav-link + a,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > a + a, .ta-left-sidebar nav
-.nav-inline .menu-admin > li > a + a,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > ul li .nav-link + a, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-inline .nav-link + a, .ta-left-sidebar nav
-.nav-inline .menu-admin > li > ul .menu-admin > li > a + a,
-.nav-inline .ta-left-sidebar nav .menu-admin > li > ul li a + a, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-inline a + a {
+.nav-inline .nav-item + .nav-item,
+.nav-inline .nav-link + .nav-link {
   margin-left: 1rem; }
 
 .nav-tabs {
@@ -2731,57 +2718,27 @@ input[type="button"].btn-block {
     content: "";
     display: table;
     clear: both; }
-  .nav-tabs .nav-item, .nav-tabs .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .nav-tabs li {
+  .nav-tabs .nav-item {
     float: left;
     margin-bottom: -1px; }
-    .nav-tabs .nav-item + .nav-item, .nav-tabs .ta-left-sidebar nav .menu-admin li + .nav-item, .ta-left-sidebar nav .menu-admin .nav-tabs li + .nav-item, .nav-tabs .ta-left-sidebar nav .menu-admin .nav-item + li, .ta-left-sidebar nav .menu-admin .nav-tabs .nav-item + li, .nav-tabs .ta-left-sidebar nav .menu-admin li + li, .ta-left-sidebar nav .menu-admin .nav-tabs li + li {
+    .nav-tabs .nav-item + .nav-item {
       margin-left: 0.2rem; }
-  .nav-tabs .nav-link, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a {
+  .nav-tabs .nav-link {
     display: block;
     padding: 0.5em 1em;
     border: 1px solid transparent;
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem; }
-    .nav-tabs .nav-link:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a:focus, .nav-tabs .nav-link:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a:hover {
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
       border-color: #eceeef #eceeef #ddd; }
-    .nav-tabs .nav-link.disabled, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.disabled, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.disabled, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.disabled, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.disabled, .nav-tabs .nav-link.disabled:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.disabled:focus, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.disabled:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.disabled:focus, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.disabled:focus, .nav-tabs .nav-link.disabled:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.disabled:hover, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.disabled:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.disabled:hover, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.disabled:hover {
+    .nav-tabs .nav-link.disabled, .nav-tabs .nav-link.disabled:focus, .nav-tabs .nav-link.disabled:hover {
       color: #818a91;
       background-color: transparent;
       border-color: transparent; }
-  .nav-tabs .nav-link.active, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.active, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.active, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.active, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.active, .nav-tabs .nav-link.active:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.active:focus, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.active:focus, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.active:focus, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.active:focus, .nav-tabs .nav-link.active:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > a.active:hover, .ta-left-sidebar nav .nav-tabs .menu-admin > li > a.active:hover, .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li a.active:hover, .ta-left-sidebar nav .menu-admin > li > ul li .nav-tabs a.active:hover,
+  .nav-tabs .nav-link.active, .nav-tabs .nav-link.active:focus, .nav-tabs .nav-link.active:hover,
   .nav-tabs .nav-item.open .nav-link,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .nav-link, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .nav-link,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav
-  .nav-tabs .nav-item.open .menu-admin > li > a,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .menu-admin > li > a,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li
-  .nav-tabs .nav-item.open a,
-  .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li.open a, .ta-left-sidebar nav .menu-admin > li > ul
-  .nav-tabs li.open a,
   .nav-tabs .nav-item.open .nav-link:focus,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .nav-link:focus, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .nav-link:focus,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav
-  .nav-tabs .nav-item.open .menu-admin > li > a:focus,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a:focus, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .menu-admin > li > a:focus,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-  .nav-tabs .nav-item.open a:focus,
-  .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li.open a:focus, .ta-left-sidebar nav .menu-admin > li > ul
-  .nav-tabs li.open a:focus,
-  .nav-tabs .nav-item.open .nav-link:hover,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .nav-link:hover, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .nav-link:hover,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav
-  .nav-tabs .nav-item.open .menu-admin > li > a:hover,
-  .nav-tabs .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a:hover, .ta-left-sidebar nav .menu-admin
-  .nav-tabs li.open .menu-admin > li > a:hover,
-  .nav-tabs .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-  .nav-tabs .nav-item.open a:hover,
-  .nav-tabs .ta-left-sidebar nav .menu-admin > li > ul li.open a:hover, .ta-left-sidebar nav .menu-admin > li > ul
-  .nav-tabs li.open a:hover {
+  .nav-tabs .nav-item.open .nav-link:hover {
     color: #55595c;
     background-color: #fff;
     border-color: #ddd #ddd transparent; }
@@ -2795,58 +2752,28 @@ input[type="button"].btn-block {
   display: table;
   clear: both; }
 
-.nav-pills .nav-item, .nav-pills .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .nav-pills li {
+.nav-pills .nav-item {
   float: left; }
-  .nav-pills .nav-item + .nav-item, .nav-pills .ta-left-sidebar nav .menu-admin li + .nav-item, .ta-left-sidebar nav .menu-admin .nav-pills li + .nav-item, .nav-pills .ta-left-sidebar nav .menu-admin .nav-item + li, .ta-left-sidebar nav .menu-admin .nav-pills .nav-item + li, .nav-pills .ta-left-sidebar nav .menu-admin li + li, .ta-left-sidebar nav .menu-admin .nav-pills li + li {
+  .nav-pills .nav-item + .nav-item {
     margin-left: 0.2rem; }
 
-.nav-pills .nav-link, .nav-pills .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .nav-pills .menu-admin > li > a, .nav-pills .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .nav-pills a {
+.nav-pills .nav-link {
   display: block;
   padding: 0.5em 1em;
   border-radius: 0.25rem; }
 
-.nav-pills .nav-link.active, .nav-pills .ta-left-sidebar nav .menu-admin > li > a.active, .ta-left-sidebar nav .nav-pills .menu-admin > li > a.active, .nav-pills .ta-left-sidebar nav .menu-admin > li > ul li a.active, .ta-left-sidebar nav .menu-admin > li > ul li .nav-pills a.active, .nav-pills .nav-link.active:focus, .nav-pills .ta-left-sidebar nav .menu-admin > li > a.active:focus, .ta-left-sidebar nav .nav-pills .menu-admin > li > a.active:focus, .nav-pills .ta-left-sidebar nav .menu-admin > li > ul li a.active:focus, .ta-left-sidebar nav .menu-admin > li > ul li .nav-pills a.active:focus, .nav-pills .nav-link.active:hover, .nav-pills .ta-left-sidebar nav .menu-admin > li > a.active:hover, .ta-left-sidebar nav .nav-pills .menu-admin > li > a.active:hover, .nav-pills .ta-left-sidebar nav .menu-admin > li > ul li a.active:hover, .ta-left-sidebar nav .menu-admin > li > ul li .nav-pills a.active:hover,
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:focus, .nav-pills .nav-link.active:hover,
 .nav-pills .nav-item.open .nav-link,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .nav-link, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .nav-link,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav
-.nav-pills .nav-item.open .menu-admin > li > a,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .menu-admin > li > a,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-pills .nav-item.open a,
-.nav-pills .ta-left-sidebar nav .menu-admin > li > ul li.open a, .ta-left-sidebar nav .menu-admin > li > ul
-.nav-pills li.open a,
 .nav-pills .nav-item.open .nav-link:focus,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .nav-link:focus, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .nav-link:focus,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav
-.nav-pills .nav-item.open .menu-admin > li > a:focus,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a:focus, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .menu-admin > li > a:focus,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-pills .nav-item.open a:focus,
-.nav-pills .ta-left-sidebar nav .menu-admin > li > ul li.open a:focus, .ta-left-sidebar nav .menu-admin > li > ul
-.nav-pills li.open a:focus,
-.nav-pills .nav-item.open .nav-link:hover,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .nav-link:hover, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .nav-link:hover,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav
-.nav-pills .nav-item.open .menu-admin > li > a:hover,
-.nav-pills .ta-left-sidebar nav .menu-admin li.open .menu-admin > li > a:hover, .ta-left-sidebar nav .menu-admin
-.nav-pills li.open .menu-admin > li > a:hover,
-.nav-pills .nav-item.open .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.nav-pills .nav-item.open a:hover,
-.nav-pills .ta-left-sidebar nav .menu-admin > li > ul li.open a:hover, .ta-left-sidebar nav .menu-admin > li > ul
-.nav-pills li.open a:hover {
+.nav-pills .nav-item.open .nav-link:hover {
   color: #fff;
   cursor: default;
   background-color: #0275d8; }
 
-.nav-stacked .nav-item, .nav-stacked .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .nav-stacked li {
+.nav-stacked .nav-item {
   display: block;
   float: none; }
-  .nav-stacked .nav-item + .nav-item, .nav-stacked .ta-left-sidebar nav .menu-admin li + .nav-item, .ta-left-sidebar nav .menu-admin .nav-stacked li + .nav-item, .nav-stacked .ta-left-sidebar nav .menu-admin .nav-item + li, .ta-left-sidebar nav .menu-admin .nav-stacked .nav-item + li, .nav-stacked .ta-left-sidebar nav .menu-admin li + li, .ta-left-sidebar nav .menu-admin .nav-stacked li + li {
+  .nav-stacked .nav-item + .nav-item {
     margin-top: 0.2rem;
     margin-left: 0; }
 
@@ -2931,17 +2858,17 @@ input[type="button"].btn-block {
   .navbar-toggler:focus, .navbar-toggler:hover {
     text-decoration: none; }
 
-.navbar-nav .nav-item, .navbar-nav .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .navbar-nav li {
+.navbar-nav .nav-item {
   float: left; }
 
-.navbar-nav .nav-link, .navbar-nav .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .navbar-nav .menu-admin > li > a, .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-nav a {
+.navbar-nav .nav-link {
   display: block;
   padding-top: .425rem;
   padding-bottom: .425rem; }
-  .navbar-nav .nav-link + .nav-link, .navbar-nav .ta-left-sidebar nav .menu-admin > li > a + .nav-link, .ta-left-sidebar nav .navbar-nav .menu-admin > li > a + .nav-link, .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a + .nav-link, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-nav a + .nav-link, .navbar-nav .ta-left-sidebar nav .menu-admin > li > .nav-link + a, .ta-left-sidebar nav .navbar-nav .menu-admin > li > .nav-link + a, .navbar-nav .ta-left-sidebar nav .menu-admin > li > a + a, .ta-left-sidebar nav .navbar-nav .menu-admin > li > a + a, .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .nav-link + a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-nav .nav-link + a, .ta-left-sidebar nav .navbar-nav .menu-admin > li > ul .menu-admin > li > a + a, .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a + a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-nav a + a {
+  .navbar-nav .nav-link + .nav-link {
     margin-left: 1rem; }
 
-.navbar-nav .nav-item + .nav-item, .navbar-nav .ta-left-sidebar nav .menu-admin li + .nav-item, .ta-left-sidebar nav .menu-admin .navbar-nav li + .nav-item, .navbar-nav .ta-left-sidebar nav .menu-admin .nav-item + li, .ta-left-sidebar nav .menu-admin .navbar-nav .nav-item + li, .navbar-nav .ta-left-sidebar nav .menu-admin li + li, .ta-left-sidebar nav .menu-admin .navbar-nav li + li {
+.navbar-nav .nav-item + .nav-item {
   margin-left: 1rem; }
 
 .navbar-light .navbar-brand, .admin-toolbar .navbar-brand {
@@ -2949,57 +2876,21 @@ input[type="button"].btn-block {
   .navbar-light .navbar-brand:focus, .admin-toolbar .navbar-brand:focus, .navbar-light .navbar-brand:hover, .admin-toolbar .navbar-brand:hover {
     color: rgba(0, 0, 0, 0.8); }
 
-.navbar-light .navbar-nav .nav-link, .admin-toolbar .navbar-nav .nav-link, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li > a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a {
+.navbar-light .navbar-nav .nav-link, .admin-toolbar .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.3); }
-  .navbar-light .navbar-nav .nav-link:focus, .admin-toolbar .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li > a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a:focus, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a:focus, .navbar-light .navbar-nav .nav-link:hover, .admin-toolbar .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li > a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a:hover, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a:hover {
+  .navbar-light .navbar-nav .nav-link:focus, .admin-toolbar .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover, .admin-toolbar .navbar-nav .nav-link:hover {
     color: rgba(0, 0, 0, 0.6); }
 
-.navbar-light .navbar-nav .open > .nav-link, .admin-toolbar .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li.open > a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.open > a, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav .open > a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .open > a, .navbar-light .navbar-nav .open > .nav-link:focus, .admin-toolbar .navbar-nav .open > .nav-link:focus, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:focus, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li.open > a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:focus, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.open > a:focus, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav .open > a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .open > a:focus, .navbar-light .navbar-nav .open > .nav-link:hover, .admin-toolbar .navbar-nav .open > .nav-link:hover, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:hover, .ta-left-sidebar nav .navbar-light .navbar-nav .menu-admin > li.open > a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:hover, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.open > a:hover, .navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-light .navbar-nav .open > a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .open > a:hover,
+.navbar-light .navbar-nav .open > .nav-link, .admin-toolbar .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .open > .nav-link:focus, .admin-toolbar .navbar-nav .open > .nav-link:focus, .navbar-light .navbar-nav .open > .nav-link:hover, .admin-toolbar .navbar-nav .open > .nav-link:hover,
 .navbar-light .navbar-nav .active > .nav-link, .admin-toolbar .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li.active > a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.active > a,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav .active > a, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .active > a,
 .navbar-light .navbar-nav .active > .nav-link:focus, .admin-toolbar .navbar-nav .active > .nav-link:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:focus, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li.active > a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:focus, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.active > a:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav .active > a:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .active > a:focus,
 .navbar-light .navbar-nav .active > .nav-link:hover, .admin-toolbar .navbar-nav .active > .nav-link:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:hover, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li.active > a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:hover, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li.active > a:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav .active > a:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav .active > a:hover,
 .navbar-light .navbar-nav .nav-link.open, .admin-toolbar .navbar-nav .nav-link.open,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.open, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.open,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.open, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.open,
 .navbar-light .navbar-nav .nav-link.open:focus, .admin-toolbar .navbar-nav .nav-link.open:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:focus, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.open:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:focus, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.open:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.open:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:focus, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.open:focus,
 .navbar-light .navbar-nav .nav-link.open:hover, .admin-toolbar .navbar-nav .nav-link.open:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:hover, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.open:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:hover, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.open:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.open:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:hover, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.open:hover,
 .navbar-light .navbar-nav .nav-link.active, .admin-toolbar .navbar-nav .nav-link.active,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.active, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.active,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.active, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.active,
 .navbar-light .navbar-nav .nav-link.active:focus, .admin-toolbar .navbar-nav .nav-link.active:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:focus, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.active:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:focus, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.active:focus,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.active:focus, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:focus, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.active:focus,
-.navbar-light .navbar-nav .nav-link.active:hover, .admin-toolbar .navbar-nav .nav-link.active:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:hover, .ta-left-sidebar nav
-.navbar-light .navbar-nav .menu-admin > li > a.active:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:hover, .ta-left-sidebar nav .admin-toolbar .navbar-nav .menu-admin > li > a.active:hover,
-.navbar-light .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-light .navbar-nav a.active:hover, .admin-toolbar .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:hover, .ta-left-sidebar nav .menu-admin > li > ul li .admin-toolbar .navbar-nav a.active:hover {
+.navbar-light .navbar-nav .nav-link.active:hover, .admin-toolbar .navbar-nav .nav-link.active:hover {
   color: rgba(0, 0, 0, 0.8); }
 
 .navbar-light .navbar-divider, .admin-toolbar .navbar-divider {
@@ -3010,57 +2901,21 @@ input[type="button"].btn-block {
   .navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
     color: white; }
 
-.navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li > a, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav a {
+.navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.5); }
-  .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:focus, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li > a:focus, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav a:focus, .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a:hover, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li > a:hover, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav a:hover {
+  .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(255, 255, 255, 0.75); }
 
-.navbar-dark .navbar-nav .open > .nav-link, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li.open > a, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav .open > a, .navbar-dark .navbar-nav .open > .nav-link:focus, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:focus, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li.open > a:focus, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav .open > a:focus, .navbar-dark .navbar-nav .open > .nav-link:hover, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.open > a:hover, .ta-left-sidebar nav .navbar-dark .navbar-nav .menu-admin > li.open > a:hover, .navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .open > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li .navbar-dark .navbar-nav .open > a:hover,
+.navbar-dark .navbar-nav .open > .nav-link, .navbar-dark .navbar-nav .open > .nav-link:focus, .navbar-dark .navbar-nav .open > .nav-link:hover,
 .navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li.active > a,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav .active > a,
 .navbar-dark .navbar-nav .active > .nav-link:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:focus, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li.active > a:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav .active > a:focus,
 .navbar-dark .navbar-nav .active > .nav-link:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li.active > a:hover, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li.active > a:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li .active > a:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav .active > a:hover,
 .navbar-dark .navbar-nav .nav-link.open,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.open,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.open,
 .navbar-dark .navbar-nav .nav-link.open:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:focus, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.open:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.open:focus,
 .navbar-dark .navbar-nav .nav-link.open:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.open:hover, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.open:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.open:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.open:hover,
 .navbar-dark .navbar-nav .nav-link.active,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.active,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.active,
 .navbar-dark .navbar-nav .nav-link.active:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:focus, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.active:focus,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:focus, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.active:focus,
-.navbar-dark .navbar-nav .nav-link.active:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > a.active:hover, .ta-left-sidebar nav
-.navbar-dark .navbar-nav .menu-admin > li > a.active:hover,
-.navbar-dark .navbar-nav .ta-left-sidebar nav .menu-admin > li > ul li a.active:hover, .ta-left-sidebar nav .menu-admin > li > ul li
-.navbar-dark .navbar-nav a.active:hover {
+.navbar-dark .navbar-nav .nav-link.active:hover {
   color: white; }
 
 .navbar-dark .navbar-divider {
@@ -3072,7 +2927,7 @@ input[type="button"].btn-block {
   clear: both; }
 
 @media (max-width: 543px) {
-  .navbar-toggleable-xs .navbar-nav .nav-item, .navbar-toggleable-xs .navbar-nav .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .navbar-toggleable-xs .navbar-nav li {
+  .navbar-toggleable-xs .navbar-nav .nav-item {
     float: none;
     margin-left: 0; } }
 
@@ -3086,7 +2941,7 @@ input[type="button"].btn-block {
   clear: both; }
 
 @media (max-width: 767px) {
-  .navbar-toggleable-sm .navbar-nav .nav-item, .navbar-toggleable-sm .navbar-nav .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .navbar-toggleable-sm .navbar-nav li {
+  .navbar-toggleable-sm .navbar-nav .nav-item {
     float: none;
     margin-left: 0; } }
 
@@ -3100,7 +2955,7 @@ input[type="button"].btn-block {
   clear: both; }
 
 @media (max-width: 991px) {
-  .navbar-toggleable-md .navbar-nav .nav-item, .navbar-toggleable-md .navbar-nav .ta-left-sidebar nav .menu-admin li, .ta-left-sidebar nav .menu-admin .navbar-toggleable-md .navbar-nav li {
+  .navbar-toggleable-md .navbar-nav .nav-item {
     float: none;
     margin-left: 0; } }
 
@@ -4401,10 +4256,10 @@ button.close {
   .carousel-indicators {
     bottom: 20px; } }
 
-.bg-inverse, .ta-left-sidebar nav .menu-admin > li:hover > a {
+.bg-inverse {
   background-color: #373a3c; }
 
-.bg-faded, .ta-wrapper .ta-navbar-top, .ta-wrapper .ta-left-sidebar, .admin-toolbar, .ta-left-sidebar nav {
+.bg-faded, .ta-wrapper .ta-navbar-top, .ta-wrapper .ta-left-sidebar, .admin-toolbar, .mp-level {
   background-color: #f7f7f9; }
 
 .bg-primary {
@@ -4889,24 +4744,30 @@ a.text-danger:focus, a.text-danger:hover {
   .hidden-print {
     display: none !important; } }
 
-.ta-wrapper .ta-navbar-top {
-  min-height: 55px; }
+html, body {
+  height: 100%; }
 
-.ta-wrapper .ta-left-sidebar {
-  width: 5em;
+.ta-wrapper {
   height: 100%;
-  z-index: 1;
-  position: absolute; }
-
-.ta-wrapper .ta-content {
-  margin-left: 0;
-  margin-top: 55px;
-  padding-top: 1em;
-  border-left: 1px solid rgba(0, 0, 0, 0.05); }
-
-@media (min-width: 768px) {
+  overflow-x: hidden;
+  /*@include media-breakpoint-up(md) {
+        .ta-content {
+            margin-left: $left-navigation-width + $left-navigation-expand-width;
+        }
+    }*/ }
+  .ta-wrapper .ta-navbar-top {
+    min-height: 55px; }
+  .ta-wrapper .ta-left-sidebar {
+    width: 5em;
+    z-index: 1;
+    position: absolute; }
+  .ta-wrapper .ta-container {
+    margin-left: 0;
+    padding-top: 1em;
+    border-left: 1px solid rgba(0, 0, 0, 0.05); }
   .ta-wrapper .ta-content {
-    margin-left: 20em; } }
+    padding-top: 55px;
+    /*margin-top: */ }
 
 .validation-summary-errors {
   padding-bottom: 0; }
@@ -4920,88 +4781,300 @@ label .field-validation-error::before {
 .admin-toolbar {
   margin-bottom: 1em; }
 
-.ta-left-sidebar nav {
-  position: fixed;
-  top: 55px;
-  left: 0;
-  height: 100%;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  z-index: 10;
-  overflow: hidden;
-  /*box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);*/ }
-  .ta-left-sidebar nav .menu-admin > li:first-child > a {
-    border-top: 1px solid rgba(0, 0, 0, 0.05); }
-  .ta-left-sidebar nav .menu-admin > li > a {
-    text-indent: -500em;
-    display: block;
-    height: 5em;
-    width: 5em;
-    line-height: 5em;
-    text-align: center;
-    position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: background 0.1s ease-in-out; }
-  .ta-left-sidebar nav .menu-admin > li > a:before {
-    font-family: FontAwesome;
-    speak: none;
-    text-indent: 0em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 1.4em; }
-  .ta-left-sidebar nav .menu-admin > li ul {
-    margin: 0;
-    padding-left: 1em; }
-  .ta-left-sidebar nav .menu-admin > li > ul {
-    width: 0;
-    overflow: hidden;
-    z-index: 5;
-    transition: all 0.1s ease-in-out;
-    position: fixed;
-    top: 55px;
-    left: 5em;
-    height: 100%; }
-    .ta-left-sidebar nav .menu-admin > li > ul li {
-      list-style-type: none; }
-      .ta-left-sidebar nav .menu-admin > li > ul li a {
-        display: block;
-        height: 2em;
-        text-indent: 0em;
-        line-height: 2em;
-        text-align: center;
-        position: relative;
-        transition: background 0.1s ease-in-out;
-        border: none;
-        font-size: 1rem;
-        font-weight: normal;
-        text-decoration: none; }
-      .ta-left-sidebar nav .menu-admin > li > ul li :first-child {
-        border-top: none; }
-  .ta-left-sidebar nav .menu-admin > li > ul.open {
-    width: 15em;
-    height: 100%;
-    display: block; }
-    .ta-left-sidebar nav .menu-admin > li > ul.open a {
-      text-align: left; }
-
-.menu-admin > li.content > a:before {
-  content: "\f187"; }
-
-.menu-admin > li.new > a:before {
-  content: "\f044"; }
-
-.menu-admin > li.content-definition > a:before {
-  content: "\f1b2"; }
-
-.menu-admin > li.themes > a:before {
-  content: "\f083"; }
-
-.menu-admin > li.demo > a:before {
-  content: "\f292"; }
-
 .list-group.sortable li {
   cursor: move; }
+
+*,
+*:after,
+*::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.scroller {
+  overflow-y: scroll; }
+
+.scroller,
+.scroller-inner {
+  position: relative; }
+
+.mp-pusher {
+  position: relative;
+  left: 0;
+  height: 100%; }
+
+.mp-menu {
+  position: absolute;
+  /* we can't use fixed here :( */
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+  height: 100%;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0); }
+
+.mp-level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0); }
+
+/* overlays for pusher and for level that gets covered */
+.mp-pusher::after,
+.mp-level::after,
+.mp-level::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  opacity: 0; }
+
+/* opacity on the parent menus and/or the main container */
+/*.mp-pusher::after,*/
+.mp-level::after {
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+  -moz-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+  transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s; }
+
+.mp-level::after {
+  z-index: -1; }
+
+.mp-pusher.mp-pushed::after,
+.mp-level.mp-level-overlay::after {
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  transition: opacity 0.3s; }
+
+.mp-level.mp-level-overlay {
+  cursor: pointer; }
+
+.mp-level.mp-level-overlay.mp-level::before {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 1; }
+
+.mp-pusher,
+.mp-level {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s; }
+
+/* overlap */
+.mp-overlap .mp-level.mp-level-open {
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate3d(-40px, 0, 0);
+  -moz-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0); }
+
+/* First level */
+.mp-menu > .mp-level,
+.mp-menu > .mp-level.mp-level-open,
+.mp-menu.mp-overlap > .mp-level,
+.mp-menu.mp-overlap > .mp-level.mp-level-open {
+  box-shadow: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+/* cover */
+.mp-cover .mp-level.mp-level-open {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.mp-cover .mp-level.mp-level-open > ul > li > .mp-level:not(.mp-level-open) {
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0); }
+
+/* content style */
+.mp-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.mp-menu h2 {
+  margin: 0;
+  padding: 1em;
+  color: #373a3c;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  font-weight: 300;
+  font-size: 2em; }
+
+.mp-menu.mp-overlap h2::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /*font-size: 2em;*/
+  line-height: 2;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.1s 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.1s 0.3s;
+  transition: opacity 0.3s, transform 0.1s 0.3s;
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  transform: translateX(-100%); }
+
+.mp-overlap .mp-level.mp-level-overlay > h2::before {
+  opacity: 1;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0); }
+
+.mp-menu ul li > a {
+  display: block;
+  padding: 0.5em 0.5em 0.5em 1.8em;
+  outline: none;
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  font-size: 1.1em;
+  -webkit-transition: background 0.3s, box-shadow 0.3s;
+  -moz-transition: background 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  color: #373a3c; }
+
+.mp-menu ul li > a:hover {
+  color: #0275d8; }
+
+.mp-menu ul li::before {
+  position: absolute;
+  left: 10px;
+  z-index: -1;
+  color: #373a3c;
+  line-height: 2; }
+
+.mp-menu ul li.parent::before {
+  content: "\f104";
+  font-family: "FontAwesome";
+  font-size: 1.4em; }
+
+.mp-level > ul > li:first-child > a {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2), inset 0 1px rgba(0, 0, 0, 0.2); }
+
+.mp-menu ul li a:hover,
+.mp-level > ul > li:first-child > a:hover {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 -1px transparent;
+  text-decoration: none; }
+
+.mp-menu .mp-level.mp-level-overlay > ul > li > a,
+.mp-level.mp-level-overlay > ul > li:first-child > a {
+  box-shadow: inset 0 -1px transparent; }
+
+.mp-level > ul > li:first-child > a:hover,
+.mp-level.mp-level-overlay > ul > li:first-child > a {
+  box-shadow: inset 0 -1px transparent, inset 0 1px transparent; }
+
+/* seems like Chrome 34.0.1847.131 needs the second shadow otherwise the transition breaks */
+.mp-back {
+  background: rgba(0, 0, 0, 0.1);
+  outline: none;
+  color: #55595c;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: block;
+  font-size: 0.8em;
+  padding: 1em;
+  position: relative;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.1);
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  transition: background 0.3s; }
+
+.mp-back::after {
+  font-family: 'FontAwesome';
+  position: absolute;
+  content: "\f105 ";
+  right: 10px;
+  font-size: 1.3em;
+  color: rgba(0, 0, 0, 0.3); }
+
+.mp-menu .mp-level.mp-level-overlay > .mp-back,
+.mp-menu .mp-level.mp-level-overlay > .mp-back::after {
+  background: transparent;
+  box-shadow: none;
+  color: transparent; }
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+/* We'll show the first level only */
+.no-csstransforms3d .mp-pusher,
+.no-js .mp-pusher {
+  padding-left: 300px; }
+
+.no-csstransforms3d .mp-menu .mp-level,
+.no-js .mp-menu .mp-level {
+  display: none; }
+
+.no-csstransforms3d .mp-menu > .mp-level,
+.no-js .mp-menu > .mp-level {
+  display: block; }
+
+.mp-menu h2::before {
+  font-family: "FontAwesome";
+  padding-right: 0.2em;
+  font-size: 0.9em; }
+
+.mp-menu.mp-cover h2::before {
+  font-family: "FontAwesome";
+  padding-right: 0.5em;
+  font-size: 0.9em; }
+
+.mp-menu.mp-cover h2 {
+  /*text-transform: uppercase;*/
+  /*font-weight: 700;*/
+  /*letter-spacing: 1px;*/
+  padding-right: 0.5em;
+  font-size: 1.2em;
+  color: #373a3c; }
+
+.mp-menu ul li > a::before {
+  font-family: "FontAwesome";
+  color: #55595c;
+  padding-right: 0.5em;
+  opacity: 1; }
+
+.mp-menu h2.world::before {
+  content: "\f06c"; }
+
+.mp-menu h2.content::before,
+.mp-menu ul li.content > a::before {
+  content: "\f187"; }
+
+.mp-menu h2.new::before,
+.mp-menu ul li.new > a:before {
+  content: "\f044"; }
+
+.mp-menu h2.content-definition::before,
+.mp-menu ul li.content-definition > a:before {
+  content: "\f1b2"; }
+
+.mp-menu h2.themes::before,
+.mp-menu ul li.themes > a:before {
+  content: "\f083"; }
+
+.mp-menu h2.demo::before,
+.mp-menu ul li.demo > a:before {
+  content: "\f292"; }
+
+#trigger::before {
+  font-family: "FontAwesome";
+  content: "\f0c9";
+  font-size: 1em;
+  padding: 0;
+  margin-right: 0.5em; }

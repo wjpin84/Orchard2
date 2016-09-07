@@ -1,184 +1,13 @@
-// Custom variables
-
-// Because !default means that a variable is not assigned if it already contains a value,
-// we alter the variable before importing boostrap as _variables.scss will use !default
-
-@import "src/Orchard.Web/Modules/Orchard.Resources/Assets/Bootstrap/scss/bootstrap.scss";
-
-
-$top-nav-height: 55px;
-$left-navigation-width: 5em;
-$left-navigation-expand-width: 15em;
-
-// Layout
-// -----------------------------
-
-html, body { // important for the menu to take the full length of the window
-	height: 100%;
-}
-
-.ta-wrapper {
-
-    height: 100%;
-    overflow-x: hidden;
-
-    .ta-navbar-top {
-        @extend .bg-faded;
-        @extend .navbar, .navbar-fixed-top;
-        min-height: $top-nav-height;
-    }
-
-    .ta-left-sidebar {
-        @extend .bg-faded;
-        @extend .hidden-sm-down;
-        width: $left-navigation-width;
-        z-index: 1;
-        position: absolute;
-    }
-
-    .ta-container {
-        @extend .container-fluid;
-        margin-left: 0;
-        padding-top: 1em;
-        border-left: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .ta-content {
-        padding-top: $top-nav-height;
-        /*margin-top: */
-    }
-
-    /*@include media-breakpoint-up(md) {
-        .ta-content {
-            margin-left: $left-navigation-width + $left-navigation-expand-width;
-        }
-    }*/
-}
-
-// Forms
-// -----------------------------
-
-.hint {
-    @extend .small, .text-muted;
-}
-
-.validation-summary-errors {
-    @extend .alert, .alert-danger;
-    padding-bottom:0;
-}
-
-.field-validation-error {
-    @extend small, .form-control-feedback;
-}
-
-.input-validation-error {
-    @extend .form-control-danger;
-}
-
-.has-validation-error {
-    @extend .has-danger;
-}
-
-// When the validation message in inside the label, add a separator
-label .field-validation-error::before {
-    content: "- ";
-}
-
-.button {
-    @extend .btn, .btn-primary;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-// Toolbar
-// ------------------------------
-
-.admin-toolbar {
-    @extend .navbar, .navbar-light, .bg-faded;
-    margin-bottom: 1em;
-}
-
-
-// Messages
-// ------------------------------
-
-.message {
-    @extend .alert;
-}
-
-.message-success {
-    @extend .alert-success;
-}
-
-.message-information {
-    @extend .alert-info;
-}
-
-.message-warning {
-    @extend .alert-warning;
-}
-
-.message-error {
-    @extend .alert-danger;
-}
-
-
-// Pager
-// ------------------------------
-
-ul.pager {
-    @extend .pagination;
-}
-
-ul.pager li {
-    @extend .page-item;
-}
-
-ul.pager li a {
-    @extend .page-link;
-}
-
-// Sortable
-// ------------------------------
-
-.list-group.sortable li {
-    cursor: move;
-}
-
-// Responsive sizes
-// Creates mixins to target all breakpoints
-// ------------------------------
-.col-xs {
-    @extend .col-xs-8, .col-sm-4, .col-md-3, .col-lg-2, .col-xl-1;
-}
-
-.col-sm {
-    @extend .col-xs-12, .col-sm-9, .col-md-6, .col-lg-3, .col-xl-3;
-}
-
-.col-md {
-    @extend .col-xs-12, .col-sm-12, .col-md-10, .col-lg-8, .col-xl-6;
-}
-
-.col-lg {
-    @extend .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12, .col-xl-9;
-}
-
-.col-xl {
-    @extend .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12, .col-xs-12;
-}
-
-// Menu
-// --------------------------------
-
 *,
 *:after,
 *::before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+html, body, .container, .scroller {
+	height: 100%;
 }
 
 .scroller {
@@ -188,6 +17,29 @@ ul.pager li a {
 .scroller,
 .scroller-inner {
 	position: relative;
+}
+
+.container {
+	position: relative;
+	overflow: hidden;
+	background: #34495e;
+}
+
+.menu-trigger {
+	position: relative;
+	padding-left: 60px;
+	font-size: 0.9em;
+}
+
+.menu-trigger:before {
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 40px;
+	height: 6px;
+	background: #fff;
+	box-shadow: 0 6px #34495e, 0 12px #fff, 0 18px #34495e, 0 24px #fff;
+	content: '';
 }
 
 .mp-pusher {
@@ -209,12 +61,12 @@ ul.pager li a {
 }
 
 .mp-level {
-    @extend .bg-faded;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background: white;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	-moz-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
@@ -250,7 +102,7 @@ ul.pager li a {
 .mp-level.mp-level-overlay::after {
 	width: 100%;
 	height: 100%;
-	opacity: 0.1;
+	opacity: 1;
 	-webkit-transition: opacity 0.3s;
 	-moz-transition: opacity 0.3s;
 	transition: opacity 0.3s;
@@ -294,7 +146,6 @@ ul.pager li a {
 }
 
 /* cover */
-
 .mp-cover .mp-level.mp-level-open {
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
@@ -317,7 +168,7 @@ ul.pager li a {
 .mp-menu h2 {
 	margin: 0;
 	padding: 1em;
-	color: $gray-dark;
+	color: rgba(0,0,0,0.4);
 	text-shadow: 0 0 1px rgba(0,0,0,0.1);
 	font-weight: 300;
 	font-size: 2em;
@@ -327,8 +178,9 @@ ul.pager li a {
 	position: absolute;
 	top: 0;
 	right: 0;
-	/*font-size: 2em;*/
-	line-height: 2;
+	margin-right: 8px;
+	font-size: 75%;
+	line-height: 1.8;
 	opacity: 0;
 	-webkit-transition: opacity 0.3s, -webkit-transform 0.1s 0.3s;
 	-moz-transition: opacity 0.3s, -moz-transform 0.1s 0.3s;
@@ -336,6 +188,13 @@ ul.pager li a {
 	-webkit-transform: translateX(-100%);
 	-moz-transform: translateX(-100%);
 	transform: translateX(-100%);
+}
+
+.mp-menu.mp-cover h2 {
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 1px;
+	font-size: 1em;
 }
 
 .mp-overlap .mp-level.mp-level-overlay > h2::before {
@@ -350,33 +209,22 @@ ul.pager li a {
 
 .mp-menu ul li > a {
 	display: block;
-	padding: 0.5em 0.5em 0.5em 1.8em;
+	padding: 0.7em 1em 0.7em 1.8em;
 	outline: none;
 	box-shadow: inset 0 -1px rgba(0,0,0,0.2);
 	text-shadow: 0 0 1px rgba(255,255,255,0.1);
-	font-size: 1.1em;
+	font-size: 1.4em;
 	-webkit-transition: background 0.3s, box-shadow 0.3s;
 	-moz-transition: background 0.3s, box-shadow 0.3s;
 	transition: background 0.3s, box-shadow 0.3s;
-    color: $gray-dark;
-}
-
-.mp-menu ul li > a:hover {
-    color: $brand-primary;
 }
 
 .mp-menu ul li::before {
 	position: absolute;
 	left: 10px;
 	z-index: -1;
-	color: $gray-dark;
-	line-height: 2;
-}
-
-.mp-menu ul li.parent::before {
-	content: "\f104";
-    font-family: "FontAwesome";
-    font-size:1.4em;
+	color: rgba(0,0,0,0.2);
+	line-height: 3.5;
 }
 
 .mp-level > ul > li:first-child > a {
@@ -387,7 +235,6 @@ ul.pager li a {
 .mp-level > ul > li:first-child > a:hover {
 	background: rgba(0,0,0,0.2);
 	box-shadow: inset 0 -1px rgba(0,0,0,0);
-    text-decoration: none;
 }
 
 .mp-menu .mp-level.mp-level-overlay > ul > li > a,
@@ -403,7 +250,8 @@ ul.pager li a {
 .mp-back {
 	background: rgba(0,0,0,0.1);
 	outline: none;
-	color: $gray;
+	color: #fff;
+	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: 700;
 	display: block;
@@ -417,9 +265,9 @@ ul.pager li a {
 }
 
 .mp-back::after {
-	font-family: 'FontAwesome';
+	font-family: 'linecons';
 	position: absolute;
-	content: "\f105 ";
+	content: "\e037";
 	right: 10px;
 	font-size: 1.3em;
 	color: rgba(0,0,0,0.3);
@@ -447,70 +295,4 @@ ul.pager li a {
 .no-csstransforms3d .mp-menu > .mp-level,
 .no-js .mp-menu > .mp-level {
 	display: block;
-}
-
-.mp-menu h2::before {
-    font-family: "FontAwesome";
-    padding-right: 0.2em;
-    font-size: 0.9em;
-}
-
-.mp-menu.mp-cover h2::before {
-    font-family: "FontAwesome";
-    padding-right: 0.5em;
-    font-size: 0.9em;
-}
-
-// title of the slide with cover option
-.mp-menu.mp-cover h2 {
-	/*text-transform: uppercase;*/
-	/*font-weight: 700;*/
-	/*letter-spacing: 1px;*/
-    padding-right: 0.5em;
-	font-size: 1.2em;
-    color: $gray-dark;
-}
-
-.mp-menu ul li > a::before {
-    font-family: "FontAwesome";
-    color: $gray;
-    padding-right: 0.5em;
-    opacity: 1;
-}
-
-.mp-menu h2.world::before {
-    content: "\f06c";
-}
-
-.mp-menu h2.content::before,
-.mp-menu ul li.content > a::before {
-    content: "\f187";
-}
-
-.mp-menu h2.new::before,
-.mp-menu ul li.new > a:before {
-    content: "\f044";
-}
-
-.mp-menu h2.content-definition::before,
-.mp-menu ul li.content-definition > a:before {
-    content: "\f1b2";
-}
-
-.mp-menu h2.themes::before,
-.mp-menu ul li.themes > a:before {
-    content: "\f083";
-}
-
-.mp-menu h2.demo::before,
-.mp-menu ul li.demo > a:before {
-    content: "\f292";
-}
-
-#trigger::before {
-    font-family: "FontAwesome";
-    content:"\f0c9";
-    font-size: 1em;
-    padding:0;
-    margin-right: 0.5em;
 }

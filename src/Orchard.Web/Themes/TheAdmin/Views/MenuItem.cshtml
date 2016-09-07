@@ -1,0 +1,35 @@
+﻿@{
+    TagBuilder tag = Tag(Model, "li");
+
+    var modelClass = String.Join(" ", Model.Classes);
+
+    // Morphing the shape to keep Model untouched
+    Model.Metadata.Alternates.Clear();
+    Model.Metadata.Type = "MenuItemLink";
+
+    tag.InnerHtml.AppendHtml(Display(Model));
+
+    // Render sub-items (MenuItem)
+    if (Model.HasItems)
+    {
+        tag.AddCssClass("parent");
+
+        tag.InnerHtml.AppendHtml("<div class=\"mp-level\">");
+        tag.InnerHtml.AppendHtml("<h2 class=\"icon icon-display " + modelClass + "\">");
+        tag.InnerHtml.Append(Model.Text);
+        tag.InnerHtml.AppendHtml("</h2>");
+        tag.InnerHtml.AppendHtml(T["<a class=\"mp-back\" href=\"#\">BACK</a>"]);
+
+        tag.InnerHtml.AppendHtml("<ul>");
+
+        foreach (var item in Model.Items)
+        {
+            tag.InnerHtml.AppendHtml(Display(item));
+        }
+
+        tag.InnerHtml.AppendHtml("</ul>");
+        tag.InnerHtml.AppendHtml("</div>");
+    }
+}
+
+@tag
